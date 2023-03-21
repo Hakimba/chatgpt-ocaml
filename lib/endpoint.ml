@@ -1,0 +1,1 @@
+let chatgpt = "chat/completions";;
