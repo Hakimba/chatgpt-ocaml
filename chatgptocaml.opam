@@ -10,9 +10,15 @@ homepage: "https://github.com/username/reponame"
 doc: "https://url/to/documentation"
 bug-reports: "https://github.com/username/reponame/issues"
 depends: [
-  "ocaml"
   "dune" {>= "3.5"}
   "odoc" {with-doc}
+  "ocaml" {= "4.14.0"}
+  "ocaml-base-compiler" {= "4.14.0"}
+  "cohttp" {= "5.0.0"}
+  "cohttp-lwt-unix" {= "5.0.0"}
+  "tls" {= "0.17.0"}
+  "lwt_ssl" {= "1.2.0"}
+  "ppx_deriving_yojson" {= "3.7.0"}
 ]
 build: [
   ["dune" "subst"] {dev}

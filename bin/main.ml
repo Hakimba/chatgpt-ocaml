@@ -1,18 +1,23 @@
 open Chatgptocaml
+open ReqConsumer
+open ReqProducer
+open Types
+open Lwt
 
-let api_key = "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";;
+let main () = 
+  let endpoint = "https://api.openai.com/v1/" ^ Endpoint.chatgpt in
+  let api_key = Sys.getenv "OPENAI_API_KEY" in
+  let data_post = "application/json" in
+  let body = {
+    model = GPT_3_5_TURBO;
+    messages = [{role = User; content = "ça va ?"}]
+  } in
+  let body = Yojson.Safe.to_string (chat_completions_body_to_yojson body) in
 
-let endpoint = "https://api.openai.com/v1/" ^ Endpoint.chatgpt;;
+  Lwt_main.run (
+    let req_res = ReqProducer.make_post api_key endpoint data_post body in
+    let body = ReqConsumer.getBodyToConsume req_res in
+    body >|= print_string
+  )
 
-let data_post = "application/json";;
-
-let content = "Comment s'initier a l'étude morphologique des contes merveilleux";;
-
-let body = Printf.sprintf {|{
-      "model" : "gpt-4",
-      "messages" : [{"role" : "user", "content" : "%s"}]
-    }|} content |> Yojson.Safe.from_string |> Yojson.Safe.to_string;;
-
-let main () = Lwt_main.run (Request.handle_request_response api_key endpoint data_post body)
-
-let _ = main ()
+let () = main ()

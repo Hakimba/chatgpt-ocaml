@@ -1,4 +1,4 @@
 (executable
  (public_name chatgptocaml)
  (name main)
- (libraries chatgptocaml lwt cohttp cohttp-lwt-unix yojson str))
+ (libraries chatgptocaml lwt cohttp cohttp-lwt-unix yojson))
