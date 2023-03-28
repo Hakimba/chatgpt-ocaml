@@ -1,4 +1,5 @@
-(executable
- (public_name chatgptocaml)
- (name main)
- (libraries chatgptocaml lwt cohttp cohttp-lwt-unix yojson))
+(executables
+ (public_names chatgptocaml defaultbehavior correcteur)
+ (names main default correcteur)
+ (libraries chatgptocaml lwt cohttp cohttp-lwt-unix yojson dream)
+ (preprocess (pps lwt_ppx ppx_yojson_conv)))
