@@ -16,7 +16,7 @@ let main () =
 
   Lwt_main.run (
     let req_res = ReqProducer.make_post api_key endpoint data_post body in
-    let body = ReqConsumer.getBodyToConsume req_res in
+    let body = ReqConsumer.get_body_to_consume req_res in
     body >|= print_string
   )
 

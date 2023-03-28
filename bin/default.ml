@@ -8,8 +8,8 @@ let main () =
   let api_key = Sys.getenv "OPENAI_API_KEY" in
 
   Lwt_main.run (
-    let req_res = ReqProducer.chatgpt_default_request api_key prompt in
-    ReqConsumer.chatgptDefaultConsumer req_res >|= print_endline
+    let req_res = ReqProducer.chatgpt_basic_request api_key prompt in
+    ReqConsumer.chatgpt_basic_consumer req_res >|= print_endline
   )
 
 let () = main ()

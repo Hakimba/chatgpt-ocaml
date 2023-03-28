@@ -9,7 +9,7 @@ module ReqProducer = struct
     let headers = Header.add headers "Authorization" ("Bearer " ^ api_key) in
     Client.post ~headers ~body:(Cohttp_lwt.Body.of_string body) uri
 
-  let chatgpt_default_request api_key prompt =
+  let chatgpt_basic_request api_key prompt =
     let endpoint = "https://api.openai.com/v1/" ^ Endpoint.chatgpt in
     let uri = Uri.of_string endpoint in
     let headers = Header.init_with "Content-Type" "application/json" in
