@@ -19,4 +19,10 @@ module ReqConsumer = struct
           Yojson.Basic.Util.index 0 |> Yojson.Basic.Util.member "message" |>
           Yojson.Basic.Util.member "content" |>
           Yojson.Basic.to_string |> Utils.cleanup_api_data
+
+  let whisper_transcription_basic_consumer req_res = req_res >>=
+        fun (_,body) ->
+          body |> Cohttp_lwt.Body.to_string >|= fun body ->
+            let json_body = Yojson.Basic.from_string body in
+            json_body |> Yojson.Basic.Util.member "text" |> Yojson.Basic.to_string
 end

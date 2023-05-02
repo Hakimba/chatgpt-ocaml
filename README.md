@@ -1,2 +1,5 @@
-# chatgpt-ocaml
-A binding of the chatGPT API in OCaml
+# openai-ocaml
+WIP : a client of a subset of the openai API
+
+[x] chat completions
+[x] audio transcriptions

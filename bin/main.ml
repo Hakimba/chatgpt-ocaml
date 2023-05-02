@@ -12,7 +12,7 @@ let main () =
     model = GPT_3_5_TURBO;
     messages = [{role = User; content = "ça va ?"}]
   } in
-  let body = Yojson.Safe.to_string (chat_completions_body_to_yojson body) in
+  let body = Yojson.Safe.to_string (chat_completion_body_to_yojson body) in
 
   Lwt_main.run (
     let req_res = ReqProducer.make_post api_key endpoint data_post body in

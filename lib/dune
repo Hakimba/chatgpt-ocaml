@@ -1,4 +1,4 @@
 (library
  (name chatgptocaml)
- (libraries lwt cohttp cohttp-lwt-unix ppx_deriving_yojson.runtime str)
+ (libraries lwt cohttp cohttp-lwt-unix ppx_deriving_yojson.runtime str multipart_form-cohttp-lwt multipart_form-lwt multipart_form)
  (preprocess (pps ppx_deriving_yojson)))
