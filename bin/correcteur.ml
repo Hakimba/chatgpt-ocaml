@@ -9,7 +9,7 @@ type prompt_object = {
 let chatgpt_correct_request prompt =
   let api_key = Sys.getenv "OPENAI_API_KEY" in
   let prefix = "Réecrit seulement ce texte sans fautes : \n" in
-  let req_res = ReqProducer.chatgpt_basic_request api_key (prefix^prompt) in
+  let req_res = ReqProducer.chatgpt_basic_request api_key (prefix^prompt) GPT_3_5_TURBO in
   ReqConsumer.chatgpt_basic_consumer req_res
 
 
@@ -49,6 +49,20 @@ let () =
 
         let%lwt res = chatgpt_correct_request prompt_object.prompt in
         `String res
+        |> Yojson.Safe.to_string
+        |> Dream.json);
+
+    Dream.post "/tryhyper"
+        (fun request ->
+          let%lwt body = Dream.body request in
+          
+          let prompt_object =
+            body
+            |> Yojson.Safe.from_string
+            |> prompt_object_of_yojson
+          in
+
+          `String prompt_object.prompt
         |> Yojson.Safe.to_string
         |> Dream.json);
 
