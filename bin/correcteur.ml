@@ -52,18 +52,4 @@ let () =
         |> Yojson.Safe.to_string
         |> Dream.json);
 
-    Dream.post "/tryhyper"
-        (fun request ->
-          let%lwt body = Dream.body request in
-          
-          let prompt_object =
-            body
-            |> Yojson.Safe.from_string
-            |> prompt_object_of_yojson
-          in
-
-          `String prompt_object.prompt
-        |> Yojson.Safe.to_string
-        |> Dream.json);
-
   ]
