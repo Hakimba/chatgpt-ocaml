@@ -47,8 +47,32 @@ let () =
           |> prompt_object_of_yojson
         in
 
-        let%lwt res = chatgpt_correct_request prompt_object.prompt in
+        let prompt_value = match prompt_object with
+          | Ok v -> v
+          | Error err -> failwith err
+        in
+
+        let%lwt res = chatgpt_correct_request prompt_value.prompt in
         `String res
+        |> Yojson.Safe.to_string
+        |> Dream.json);
+
+    Dream.post "/tryhyper"
+        (fun request ->
+          let%lwt body = Dream.body request in
+          
+          let prompt_object =
+            body
+            |> Yojson.Safe.from_string
+            |> prompt_object_of_yojson
+          in
+
+          let prompt_value = match prompt_object with
+            | Ok v -> v
+            | Error err -> failwith err
+          in
+
+          `String prompt_value.prompt
         |> Yojson.Safe.to_string
         |> Dream.json);
 

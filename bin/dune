@@ -1,5 +1,5 @@
 (executables
- (public_names chatgptocaml defaultbehavior whisper tryhyper)
- (names main default whisper tryhyper)
- (libraries chatgptocaml lwt cohttp cohttp-lwt-unix yojson hyper multipart_form-cohttp-lwt multipart_form-lwt multipart_form)
- (preprocess (pps lwt_ppx ppx_yojson_conv)))
+ (public_names chatgptocaml default whisper tryhyper correcteur)
+ (names main default whisper tryhyper correcteur)
+ (libraries chatgptocaml lwt dream cohttp cohttp-lwt-unix yojson core ppx_deriving_yojson.runtime hyper multipart_form-cohttp-lwt multipart_form-lwt multipart_form)
+ (preprocess (pps lwt_ppx ppx_deriving_yojson)))

@@ -9,9 +9,8 @@ let main () =
 
   Lwt_main.run (
     let req_res = ReqProducer.chatgpt_basic_request api_key prompt GPT_4 in
-    ReqConsumer.chatgpt_basic_consumer req_res >|= print_endline
+    ReqConsumer.get_body_to_consume req_res >|= print_endline
   )
 
 let () = main ()
 
-  
